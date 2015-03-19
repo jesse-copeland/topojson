@@ -21,6 +21,7 @@ function draw () {
   function ready( error, us, data ) {
 
     incomes = transformFIPSData(data);
+    window.mydata = incomes;
     drawMap(us, incomes);
   }
   
@@ -42,9 +43,9 @@ function draw () {
 
   function drawMap (us, incomes) {
 
-    var maxVals = findMaxFIPSVals(incomes);
+    var maxVals = window.maxVals = findMaxFIPSVals(incomes);
     console.log(maxVals);
-    var minVals = findMinFIPSVals(incomes);
+    var minVals = window.minVals = findMinFIPSVals(incomes);
     var stateMaxes = [];
     var stateMins = [];
 
