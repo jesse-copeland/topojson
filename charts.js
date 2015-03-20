@@ -1,4 +1,4 @@
-// (function () { //IIFE wrapper start, uncomment before prod
+module.exports = function (mapSource, dataSource, mapEl, graphEl, brushEl) {
   
   //Default configs
   var width, height, projection, path, svg, g;
@@ -12,14 +12,10 @@
   width = 800;
   height = 600;
 
-  getDataSets(); // Trigger getting data and drawing charts
+  getDataSets(mapSource, dataSource); // Trigger getting data and drawing charts
 
   // get Source Data
   function getDataSets (mapSource, dataSource) {
-
-    mapSource = 'USA.json'; // temp var. this will be served by api
-    dataSource = 'per_capita_personal_income.csv'; // temp var. this will be served by api
-
     queue()
       .defer(d3.json, mapSource)
       .defer(d3.csv, dataSource)
@@ -47,7 +43,7 @@
     path = d3.geo.path()
       .projection(projection);
 
-    svg = d3.select('#map').append('svg')
+    svg = d3.select(mapEl).append('svg')
       .attr('width', width)
       .attr('height', height);
 
@@ -167,4 +163,5 @@
     }, {numOfYrs: 0, minYear: Infinity, minVal: Infinity});
   } //end findMinFIPSVals
 
-// })(); //IIFE wrapper end, uncomment before prod
+}; // end module.exports
+
